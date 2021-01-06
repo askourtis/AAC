@@ -33,13 +33,9 @@ elseif pft == "LPS"
     % If previous frame is LPS return OLS
     ft = "OLS";
 else
-    % Calculate if NFT is ESH
-    isNFESH = isESH(NFT);
-    % Deduce the current type for both channels
-    TR = deduceType(isNFESH(1), pft);
-    TL = deduceType(isNFESH(2), pft);
-    % Combine with the given combination table
-    ft = combineTypes(TR, TL);
+    % The next frame is ESH if either one of the channels is
+    % Deduce the whole frame based on that
+    ft = deduceType(any(isESH(NFT)), pft);
 end
 
 %% Return Checks
@@ -120,45 +116,6 @@ elseif pft == "ESH"
     end
 else
     error("Code should not reach this point. pft = '%s'", pft)
-end
-
-%% Return Checks
-assert(isstring(ft), "ft is not string")
-assert(isscalar(ft), "ft is not scalar")
-assert(any(ft == ["OLS" "LSS" "ESH" "LPS"]), "'%s' value for ft is not acceptable", ft)
-end
-
-function ft = combineTypes(TL, TR)
-% Combination table for the channels
-%
-% Parameters:
-%   TL - The type of the left channel       [String]
-%   TR - The type of the right channel      [String]
-%
-% Returns:
-%   The type of the whole frame
-%       Possible returns: "OLS", "LSS", "ESH", "LPS"
-
-%% Type Checks
-assert(isstring(TL), "TL is not string");
-assert(isscalar(TL), "TL is not scalar");
-assert(any(TL == ["OLS" "LSS" "ESH" "LPS"]), "'%s' value for TL is not acceptable", TL)
-
-assert(isstring(TR), "TR is not string");
-assert(isscalar(TR), "TR is not scalar");
-assert(any(TR == ["OLS" "LSS" "ESH" "LPS"]), "'%s' value for TR is not acceptable", TR)
-
-%% Code
-if TL == TR
-    ft = TL;
-elseif any([TL TR] == "ESH")
-    ft = "ESH";
-elseif TL == "OLS"
-    ft = TR;
-elseif TR == "OLS"
-    ft = TL;
-else
-    ft = "ESH";
 end
 
 %% Return Checks

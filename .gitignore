@@ -1,0 +1,8 @@
+#Ignore All
+*
+
+#Except
+!.gitignore
+!README.md
+!*.m
+!Level1

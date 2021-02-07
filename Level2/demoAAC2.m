@@ -1,5 +1,5 @@
 function SNR = demoAAC2(fNameIn, fNameOut)
-% Demonstration for Level 1
+% Demonstration for Level 2
 %
 % Parameters:
 %   fNameIn - The name of the input file   [string]

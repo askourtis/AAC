@@ -1,4 +1,11 @@
 function b = quantize(a)
+% Converts values a to symbols b
+%
+% Parameters:
+%   a - Any number
+%
+% Returns:
+%   The associated symbol
 b = zeros(size(a));
 d = (-0.7:0.1:0.7) - 0.05;
 

@@ -6,8 +6,12 @@ function x = iAACoder2(AACSeq2, fNameOut)
 %       STRUCT:
 %           frameType   - The type of the frame                           [String]
 %           winType     - The type of the window                          [String]
-%           chl         - The FREQUENCY domain frame of the left channel  [vector 1024-by-1]
-%           chr         - The FREQUENCY domain frame of the right channel [vector 1024-by-1]
+%           chl         - STRUCT:
+%                           The FREQUENCY domain frame of the left channel                [vector 1024-by-1]
+%                           The TNS coefficients for the given frame of the left channel  [vector (4|32)-by-1]
+%           chl         - STRUCT:
+%                           The FREQUENCY domain frame of the right channel                [vector 1024-by-1]
+%                           The TNS coefficients for the given frame of the right channel  [vector (4|32)-by-1]
 %   fNameOut - The name of the file [string]
 %
 % Returns [Optional]:

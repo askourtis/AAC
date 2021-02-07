@@ -10,13 +10,13 @@ if ft == "ESH"
         for j = 1:size(FFin, 2)
             FFR  = i*128 + (1:128);
             TNSR = i*4 + (1:4);
-            a = [1; -TNSc(TNSR, j)];
+            a = [1 -dequantize(TNSc(TNSR, j))];
             FFout(FFR, j) = filter(1, a, FFin(FFR, j));
         end
     end
 else
     for j = 1:size(FFin, 2)
-        a = [1; -TNSc(:, j)];
+        a = [1 -dequantize(TNSc(:, j))];
         FFout(:, j) = filter(1, a, FFin(:, j));
     end
 end
